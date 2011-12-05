@@ -24,7 +24,7 @@ function smarty_function_cssembed($params, &$smarty)
 	else {
 		$mediaQuery = '';
 	}
-	
+
 	// Big file, let's include it
 	if (filesize($filename) > $params['threshold']) {
 		if ( ! empty($url['query'])) {
@@ -33,7 +33,7 @@ function smarty_function_cssembed($params, &$smarty)
 		else {
 			$urlQuery = '';
 		}
-		return '<link rel="stylesheet"' . $mediaQuery . ' href="' . $params['href'] . $urlQuery . '">';
+		return '<link rel="stylesheet"' . $mediaQuery . ' href="' . $url['path'] . $urlQuery . '">';
 	}
 	// Small file, let's embed it directly on the page
 	else {
