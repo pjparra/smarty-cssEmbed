@@ -24,9 +24,16 @@ function smarty_function_cssembed($params, &$smarty)
 	else {
 		$mediaQuery = '';
 	}
+	
+	if ($params['scoped'] === true) {
+		$scoped = ' scoped';
+	}
+	else {
+		$scoped = '';
+	}
 
 	// Big file, let's include it
-	if (filesize($filename) > $params['threshold']) {
+	if ($params['force_embed'] !== true && filesize($filename) > $params['threshold']) {
 		if ( ! empty($url['query'])) {
 			$urlQuery = '?' . $url['query'];
 		}
@@ -37,7 +44,7 @@ function smarty_function_cssembed($params, &$smarty)
 	}
 	// Small file, let's embed it directly on the page
 	else {
-		return '<style' . $mediaQuery . '>' . file_get_contents($filename) . '</style>';
+		return '<style' . $mediaQuery . $scoped . '>' . file_get_contents($filename) . '</style>';
 	}
 }
 
